@@ -3,11 +3,10 @@
 	$apiKey=			"*************************************";
 	$listID=			"**********";
 	$apiCall=			$apiURL."lists/".$listID;
-	$historyFilePath=	"./newsletterhistory/";
+	$historyFilePath=		"./newsletterhistory/";
 	$daysBack= 			7;		// determines how many days back the history will be shown
-	$removeOldHistory=	true; 	// remove files older than $daysBack
-	$oneDayInSeconds=	86400;	// don't change this ;)
-
+	$removeOldHistory=		true; 	// remove files older than $daysBack
+	$oneDayInSeconds=		86400;	// don't change this ;)
 	
 	// Save current value
 	$opts = array(
@@ -21,17 +20,18 @@
 		json_encode(array("member_count" => $currentMemberCount))
 	);
 	
+	// Clean up if flag is set
+	$oldHistoryFilePath=$historyFilePath.xDaysAgo($daysBack).".php";
+	if($removeOldHistory && file_exists($oldHistoryFilePath)){
+		unlink($oldHistoryFilePath);
+	}
+	
 	// Get member_count for the whole week
 	$result = array();
-	for ($x = 0; $x <= $daysBack; $x++) {
-		$xDaysAgo=date("Y-m-d",(strtotime(gmdate('Y-m-d'))-$oneDayInSeconds*$x));	
+	for ($x = 0; $x < $daysBack; $x++) {
+		$xDaysAgo=xDaysAgo($x);
 		$xDaysAgoFilePath=$historyFilePath.$xDaysAgo.".php";
-
-		if($x===$daysBack){
-			if($removeOldHistory && file_exists($xDaysAgoFilePath)){
-				unlink($xDaysAgoFilePath);
-			}
-		}elseif(file_exists($xDaysAgoFilePath)){
+		if(file_exists($xDaysAgoFilePath)){
 			$memberCountXDaysAgo = json_decode(file_get_contents($xDaysAgoFilePath))->member_count;
 			$subresult = array('date' => $xDaysAgo, 'member_count' => $memberCountXDaysAgo, 'diff' => null);	
 		}else{
@@ -51,4 +51,9 @@
 	// Output json
 	header	('Content-Type: application/json; charset=utf-8');
 	echo(json_encode($result));
+	
+	function xDaysAgo($x){
+		global $oneDayInSeconds;
+		return date("Y-m-d",(strtotime(gmdate('Y-m-d'))-$oneDayInSeconds*$x));	
+	}
 ?>
