@@ -1,6 +1,18 @@
 # MailChimp List Member History
-Display the history of your MailChimp List member count without any auth or database.
-Note: In order for this to function, the 'script' should be called daily (use a cronjob).
+Get the history of your MailChimp List member count as JSON or ASCII graph without any auth or database.
 
-The output will look like the following:
-![alt tag](http://i.imgur.com/B1mEGwH.png)
+Note: In order to get 'historical data', the 'script' should be called daily (by using a cronjob or similar).
+
+
+list.php?render
+
+![alt tag](https://i.imgur.com/y0NY9o0.png)
+
+list.php
+![alt tag](https://i.imgur.com/hZIWDgC.png)
+
+list.php?asc
+![alt tag](https://i.imgur.com/aku63OL.png)
+
+
+
