@@ -102,7 +102,7 @@
 	function addTotalDiffIndicator(&$totalDiff){
 		if($totalDiff>0){
 			$totalDiff="&uarr;".$totalDiff;
-		}else{
+		}elseif($totalDiff<0){
 			$totalDiff="&darr;".abs($totalDiff);
 		}
 	}
