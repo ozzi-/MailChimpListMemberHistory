@@ -61,7 +61,7 @@
 		foreach($result as $k=>$v){
 			foreach($v as $ki=>$vi){
 				if($ki==='date'){
-					$body=$body."<td>&nbsp;&nbsp;<b>".$vi."</b>&nbsp;&nbsp;</td>";
+					$body=$body."<td align=center><b>".$vi."</b></td>";
 				}
 			}
 		}
@@ -69,21 +69,7 @@
 		foreach($result as $k=>$v){
 			foreach($v as $ki=>$vi){
 				if($ki==='member_count'){
-					if($vi/$factor < 1.0){
-						if($vi===null){
-							$bar="?";
-						}else{
-							$bar="&#x25FB;";
-						}
-					}else{
-						$bar="";
-						$fractionPart = fmod($vi/$factor, 1);
-						if($fractionPart>=0.5){
-							$bar="&#x25FB;<br>";
-						}
-						$bar=$bar.str_repeat("&#x25A7;<br>",$vi/$factor);	
-					}
-					$body=$body."<td valign=bottom align=center >".$bar."</td>";
+					$body=$body.'<td valign=bottom align=center ><div align="center" style="bottom:0; background:black; width:20px;height:'.((($vi/$factor)+0.1)*10).'px"></div></td>';
 				}
 			}
 		}
@@ -91,7 +77,7 @@
 		foreach($result as $k=>$v){
 			foreach($v as $ki=>$vi){
 				if($ki==='member_count'){
-					$body=$body."<td align=center >$vi</td>";
+					$body=$body."<td align=center>$vi</td>";
 				}
 			}
 		}
