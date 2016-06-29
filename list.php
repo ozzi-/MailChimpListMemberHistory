@@ -6,7 +6,7 @@
 	$secretCheck=			true; // if true, a URL parameter secret has to be defined which is equal to $secret
 	$apiCall=			$apiURL."lists/".$listID;
 	$historyFilePath=		"./newsletterhistory/";
-	$daysBack= 			7	;g// determines how many days back the history will be shown
+	$daysBack= 			7	;// determines how many days back the history will be shown
 	$removeOldHistory=		true; 	// remove files older than $daysBack
 	$oneDayInSeconds=		86400;	// don't change this ;)
 	
